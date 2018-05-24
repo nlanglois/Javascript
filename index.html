@@ -3,8 +3,10 @@
     <head>
         <title>Nik's Hangman App</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
         <link href="styles.css" rel="stylesheet" type="text/css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="main.js"></script>
     </head>
 
     <body>
@@ -19,11 +21,18 @@
 
             <div class="row">
                 <div class="col-lg-4">
-                    left side
+                    <h4>The word to guess is </h4>
+                    <h2 class="wordToGuess"></h2>
+
+                    <p>Try to guess a single letter:</p>
+                    <p>
+                        <input type="text" class="input">
+                        <button class="submit">Guess!</button>
+                    </p>
                 </div>
 
-                <div class="col-lg-8">
-                    right side
+                <div class="col-lg-8 guesses">
+                    
                 </div>
             </div>
 
