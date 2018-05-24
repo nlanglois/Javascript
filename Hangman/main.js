@@ -3,7 +3,8 @@ $(document).ready(function() {
     var words = [
         "Nikolai",
         "OLED",
-        "Macintosh"
+        "Macintosh",
+        "j"
     ]
     
 
@@ -12,56 +13,61 @@ $(document).ready(function() {
     
     var wordToGuess = words[Math.floor(Math.random() * words.length)];
     var lettersToChoose = wordToGuess.split('')
+    var numLetters = lettersToChoose.length;
+
     console.log(lettersToChoose)
 
 
     var correctGuesses = []
     for (var c = 0; c < lettersToChoose.length; c++) {
-        correctGuesses.push("-");
+        correctGuesses.push("_");
     }
     console.log(correctGuesses)
 
 
+    $("h2.wordToGuess").text(wordToGuess)
     renderCorrectGuesses(correctGuesses)
 
-    
-    $("h2.wordToGuess").text(wordToGuess)
 
 
 
     $("button.submit").on("click", function() {
+    
         var guess = input.val()
         
         if (guess == "") {
-
             alert("You've got to enter something to try.")
 
         } else {
+            var correct = $.inArray(guess, lettersToChoose)
+            console.log(correct)
 
-            //for (var g = 0; g < lettersToChoose.length; g++) {
+            if (correct != -1) {
+                //alert("You guessed correctly!")
+                correctGuesses[correct] = lettersToChoose[correct]
+                renderCorrectGuesses(correctGuesses)
 
-                var correct = $.inArray(guess, lettersToChoose)
-                console.log(correct)
+                delete lettersToChoose[correct]
+                //lettersToChoose.splice(correct, 1);
 
-                if (correct != -1) {
-                    alert("You guessed correctly!")
-                    correctGuesses[correct] = lettersToChoose[correct]
-                    renderCorrectGuesses(correctGuesses)
+                console.log(lettersToChoose)
+                console.log(correctGuesses)
 
-                    lettersToChoose.splice(correct, 1);
+                numLetters--
 
-                    console.log(lettersToChoose)
-                    console.log(correctGuesses)
+            } else {
+                //alert("Nope, not in the chosen word.")
+            }
 
-                } else {
-                    alert("Nope, not in the chosen word.")
-                }
-
-              //  return
-
-            //}            
-            
         }
+
+
+        if (numLetters == 0) {
+            alert("You win!")
+            console.log("You win!!")
+        }
+
+        console.log("Size of numLetters is " + numLetters)
 
 
     })
@@ -70,8 +76,13 @@ $(document).ready(function() {
 
 
 function renderCorrectGuesses(correctGuesses) {
-    var location = $('div.guesses')
+    var location = $('div.guesses').empty()
+    
     for (var c = 0; c < correctGuesses.length; c++) {
-        location.append(c)
+        var div = $('<span>')
+        div.text(correctGuesses[c])
+        location.append(div)
     }
+
+    //input.val() = ""
 }

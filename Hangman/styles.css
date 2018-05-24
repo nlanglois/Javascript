@@ -1,3 +1,14 @@
 div.row div {
     border: 1px dashed #000;
 }
+
+
+div.guesses {
+}
+
+div.guesses span {
+    border: 5px dashed #ccc;
+    padding: 5px;
+    font-size: 65px;
+    margin: 0 5px;
+}
